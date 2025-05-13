@@ -26,27 +26,27 @@ class Tela: #janela pincipal da calculadora
 
     def calcular(self):
         try:
-            expressao = self.Res.replace('x', '*').replace('^', '**')
+            expressao = self.Res.replace('x', '*').replace('^', '**') #substitui as operações
             resultado = self.avaliar_expressao(expressao)
             if resultado is None:
-                self.auxResultado.set("Erro")
+                self.auxResultado.set("Erro") #Caso tenha algum erro na digitação
                 self.Res = ""
             else:
-                self.auxResultado.set(str(round(resultado, 5)))
-                self.Res = str(resultado)
+                self.auxResultado.set(str(round(resultado, 5))) #arredonda 5 casas
+                self.Res = str(resultado) #armazena o resultado
         except Exception:
             self.auxResultado.set("Erro")
             self.Res = ""
 
     def avaliar_expressao(self, expr):
         try:
-            # Checa se a expressão é válida e segura de avaliar
+            #Checa se a expressão é válida e segura de avaliar
             resultado = eval(expr, {"__builtins__": None}, {})
             return resultado
         except:
             return None
 
-    def criar_botoes(self):
+    def criar_botoes(self): #lista de definição dos botões
         botoes = [
             ('0', 1, 0), ('1', 1, 1), ('2', 1, 2),
             ('3', 2, 0), ('4', 2, 1), ('5', 2, 2),
@@ -56,22 +56,24 @@ class Tela: #janela pincipal da calculadora
             ('=', 5, 3), ('.', 6, 0), ('C', 6, 1), ('-', 6, 2)
         ]
 
+            #condições deo botão
         for (texto, linha, coluna) in botoes:
-            if texto == "=":
+            if texto == "=": 
                 comando = self.calcular
                 cor = "gray"
             elif texto == "C":
                 comando = self.limpar
                 cor = "red"
-            else:
+            else: #atualiza com o valor do botão
                 comando = lambda val=texto: self.atualizar(val)
                 cor = "light blue" if texto in "+-x/^" else None
 
             tk.Button(self.tela, text=texto, width=self.WIDTH, height=self.HEIGHT,
                       font=self.Fonte, command=comando, bg=cor).grid(row=linha, column=coluna, padx=2, pady=2)
-
+    
+    #limpa quando é digitado o c
     def limpar(self):
         self.Res = ""
-        self.auxResultado.set("---")
+        self.auxResultado.set("...") #atualiza o visor
 
-Tela()
+Tela() #inicialização da calculadora
