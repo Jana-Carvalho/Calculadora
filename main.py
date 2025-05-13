@@ -51,9 +51,9 @@ class Tela: #janela pincipal da calculadora
             ('0', 1, 0), ('1', 1, 1), ('2', 1, 2),
             ('3', 2, 0), ('4', 2, 1), ('5', 2, 2),
             ('6', 3, 0), ('7', 3, 1), ('8', 3, 2),
-            ('9', 4, 0), ('+', 4, 1), ('-', 4, 2),
-            ('/', 5, 0), ('x', 5, 1), ('^', 5, 2),
-            ('=', 5, 3), ('.', 6, 0), ('C', 6, 1), ('-', 6, 2)
+            ('9', 4, 0), ('+', 5, 2), ('-', 4, 2),
+            ('/', 5, 0), ('x', 5, 1), ('^', 6, 0),
+            ('.', 4, 1), ('C', 6, 1), ('=', 6, 2)
         ]
 
             #condições deo botão
@@ -63,10 +63,10 @@ class Tela: #janela pincipal da calculadora
                 cor = "gray"
             elif texto == "C":
                 comando = self.limpar
-                cor = "red"
+                cor = "pink"
             else: #atualiza com o valor do botão
                 comando = lambda val=texto: self.atualizar(val)
-                cor = "light blue" if texto in "+-x/^" else None
+                cor = "light blue" if texto in "+-x/^" else None #Caso nenhum dos botões, informa none
 
             tk.Button(self.tela, text=texto, width=self.WIDTH, height=self.HEIGHT,
                       font=self.Fonte, command=comando, bg=cor).grid(row=linha, column=coluna, padx=2, pady=2)
