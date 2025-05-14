@@ -7,5 +7,6 @@ Ela realiza operações básicas como: soma (+), subtração (-), multiplicaçã
 
 
 Jana Caisa Carvalho dos Santos
+
 Viviane Mei Takuno Nakasato
 
